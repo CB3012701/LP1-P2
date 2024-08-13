@@ -1,6 +1,6 @@
 
 /**
- * @author Douglas Reis e Lucas Aquino        
+ * @author Erica Barbosa     
  */
 
 import java.util.Scanner;
