@@ -9,7 +9,7 @@ public class TestarConsultaAgendada {
 
         List<String> conteudoArquivo = new ArrayList();
 
-        ConsultaAgendada p1 = new ConsultaAgendada(10, 15, 30, 14, 10, 2023, "Douglas", "Marcos");
+        ConsultaAgendada p1 = new ConsultaAgendada(10, 15, 30, 14, 10, 2023, "Erica", "Marcos");
         System.out.println("---------- AGENDAMENTO DE CONSULTA ----------");
         conteudoArquivo.add("---------- AGENDAMENTO DE CONSULTA ----------");
         System.out.println("Nome do paciente: " + p1.getNomePaciente());
