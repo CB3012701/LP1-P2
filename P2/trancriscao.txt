@@ -1,0 +1,16 @@
+---------- AGENDAMENTO DE CONSULTA ----------
+Nome do paciente: Erica
+Data: 12/07/2024
+Horario: 10:15:10
+Medico: Maria
+---------- AGENDAMENTO DE CONSULTA ----------
+Nome do paciente: Erica
+Data: 12/08/2024
+Horario: 10:20:30
+Medico: Miguel
+---------- AGENDAMENTO DE CONSULTA ----------
+Nome do paciente: Douglas
+Data: 10/08/2024
+Horario: 15:30:10
+Medico: Valter
+Quantidade de consultas: 2
