@@ -1,244 +1,72 @@
+import java.util.ArrayList;
+import java.util.List;
+import static java.nio.file.StandardOpenOption.*;
+import java.nio.file.*;
+import java.io.*;
 
-/**
- * @author Erica Barbosa     
- */
+public class TestarConsultaAgendada {
+    public static void main(String[] args) {
 
-import java.util.Scanner;
-import java.text.*;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
+        List<String> conteudoArquivo = new ArrayList();
 
-public class Data {
-	private int dia;
-	private int mes;
-	private int ano;
+        ConsultaAgendada p1 = new ConsultaAgendada(10, 15, 30, 14, 10, 2023, "Douglas", "Marcos");
+        System.out.println("---------- AGENDAMENTO DE CONSULTA ----------");
+        conteudoArquivo.add("---------- AGENDAMENTO DE CONSULTA ----------");
+        System.out.println("Nome do paciente: " + p1.getNomePaciente());
+        conteudoArquivo.add("\nNome do paciente: " + p1.getNomePaciente());
+        System.out.println("Data: " + p1.getData());
+        conteudoArquivo.add("\nData: " + p1.getData());
+        System.out.println("Horario: " + p1.getHora());
+        conteudoArquivo.add("\nHorario: " + p1.getHora());
+        System.out.println("Medico: " + p1.getNomeMedico());
+        conteudoArquivo.add("\nMedico: " + p1.getNomeMedico());
 
-	public Data() {
-		this.setDia();
-		this.setMes();
-		this.setAno();
-	}
+        System.out.println("---------- AGENDAMENTO DE CONSULTA ----------");
+        ConsultaAgendada p2 = new ConsultaAgendada();
+        conteudoArquivo.add("\n---------- AGENDAMENTO DE CONSULTA ----------");
+        System.out.println("Nome do paciente: " + p2.getNomePaciente());
+        conteudoArquivo.add("\nNome do paciente: " + p2.getNomePaciente());
+        System.out.println("Data: " + p2.getData());
+        conteudoArquivo.add("\nData: " + p2.getData());
+        System.out.println("Horario: " + p2.getHora());
+        conteudoArquivo.add("\nHorario: " + p2.getHora());
+        System.out.println("Medico: " + p2.getNomeMedico());
+        conteudoArquivo.add("\nMedico: " + p2.getNomeMedico());
 
-	public Data(int d, int m, int a) {
-		this.dia = d;
-		this.mes = m;
-		this.ano = a;
-	}
+        System.out.println("---------- AGENDAMENTO DE CONSULTA ----------");
+        p1.setData();
+        p1.setHora();
+        p1.setNomePaciente();
+        p1.setNomeMedico();
 
-	public void setDia(int d) {
-		this.dia = d;
-	}
+        conteudoArquivo.add("\n---------- AGENDAMENTO DE CONSULTA ----------");
+        System.out.println("Nome do paciente: " + p1.getNomePaciente());
+        conteudoArquivo.add("\nNome do paciente: " + p1.getNomePaciente());
+        System.out.println("Data: " + p1.getData());
+        conteudoArquivo.add("\nData: " + p1.getData());
+        System.out.println("Horario: " + p1.getHora());
+        conteudoArquivo.add("\nHorario: " + p1.getHora());
+        System.out.println("Medico: " + p1.getNomeMedico());
+        conteudoArquivo.add("\nMedico: " + p1.getNomeMedico());
 
-	public void setMes(int m) {
-		this.mes = m;
-	}
+        System.out.println("Quantidade de consultas: " + ConsultaAgendada.getAmostra());
+        conteudoArquivo.add("\nQuantidade de consultas: " + ConsultaAgendada.getAmostra());
 
-	public void setAno(int a) {
-		this.ano = a;
-	}
+        Path p = Paths.get("./ConsultaAgendada.txt");
+        String conteudo = "";
 
-	public boolean validarDia() {
-		boolean valido = true;
+        for (int i = 0; i < conteudoArquivo.size(); i++) {
+            conteudo += conteudoArquivo.get(i);
+        }
 
-		if (this.dia < 0 || this.dia > 32) {
-			valido = false;
-		}
+        byte data[] = conteudo.getBytes();
 
-		return valido;
-	}
+        try (OutputStream out = new BufferedOutputStream(
+                Files.newOutputStream(p, CREATE, APPEND))) {
+            out.write(data, 0, data.length);
+        } catch (IOException x) {
+            System.err.println(x);
+        }
 
-	public void setDia() {
-		boolean controle = true;
-
-		do {
-
-			try {
-				Scanner scan = new Scanner(System.in);
-				System.out.println("Digite o valor do dia: ");
-				this.setDia(scan.nextInt());
-
-				if (!this.validarDia()) {
-					System.out.println("Valores invalidos");
-					System.out.println("Por favor, digite novamente os valores");
-					controle = true;
-				} else {
-					controle = false;
-				}
-
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-
-		} while (controle);
-	}
-
-	public boolean validarMes() {
-		boolean valido = true;
-
-		if (this.mes < 0 || this.mes > 12) {
-			valido = false;
-		}
-
-		if (this.mes == 2) {
-			if (this.dia > 29) {
-				valido = false;
-			}
-		}
-
-		return valido;
-	}
-
-	public void setMes() {
-		boolean controle = true;
-
-		do {
-
-			try {
-				Scanner scan = new Scanner(System.in);
-				System.out.println("Digite o valor do mes: ");
-				this.setMes(scan.nextInt());
-
-				if (!this.validarMes()) {
-					System.out.println("Valores invalidos");
-					System.out.println("Por favor, digite novamente os valores");
-					controle = true;
-				} else {
-					controle = false;
-				}
-
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-
-		} while (controle);
-	}
-
-	public boolean validarAno() {
-		boolean valido = true;
-
-		if (this.ano < 0) {
-			valido = false;
-		}
-
-		return valido;
-	}
-
-	public void setAno() {
-		boolean controle = true;
-
-		do {
-			try {
-				Scanner scan = new Scanner(System.in);
-				System.out.println("Digite o valor do ano:  ");
-				this.setAno(scan.nextInt());
-
-				if (!this.validarAno()) {
-					System.out.println("Valores invalidos");
-					System.out.println("Por Favor, digite novamente os valores:   ");
-					controle = true;
-				} else {
-					controle = false;
-				}
-
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-
-		} while (controle);
-
-	}
-
-	public int getDia() {
-		return this.dia;
-	}
-
-	public int getMes() {
-		return this.mes;
-	}
-
-	public int getAno() {
-		return this.ano;
-	}
-
-	public String getDataFormatada() {
-		return this.dia + "/" + this.mes + "/" + this.ano;
-	}
-
-	public String getDataFormatadaExtenso() {
-		String mesExtenso = "";
-		switch (this.mes) {
-			case 1:
-				mesExtenso = "Janeiro";
-				break;
-			case 2:
-				mesExtenso = "Fevereiro";
-				break;
-			case 3:
-				mesExtenso = "Março";
-				break;
-			case 4:
-				mesExtenso = "Abril";
-				break;
-			case 5:
-				mesExtenso = "Maio";
-				break;
-			case 6:
-				mesExtenso = "Junho";
-				break;
-			case 7:
-				mesExtenso = "Julho";
-				break;
-			case 8:
-				mesExtenso = "Agosto";
-				break;
-			case 9:
-				mesExtenso = "Setembro";
-				break;
-			case 10:
-				mesExtenso = "Outubro";
-				break;
-			case 11:
-				mesExtenso = "Novembro";
-				break;
-			case 12:
-				mesExtenso = "Dezembro";
-				break;
-
-		}
-
-		return this.dia + "/" + mesExtenso + "/" + this.ano;
-	}
-
-	public boolean getAnoBissexto() {
-		boolean auxBissexto;
-
-		if (this.ano % 400 == 0) {
-			auxBissexto = true;
-
-		} else if ((this.ano % 4 == 0) && (this.ano % 100 != 0)) {
-			auxBissexto = true;
-		} else {
-			auxBissexto = false;
-		}
-
-		return auxBissexto;
-	}
-
-	public int getDiasTranscorridos() {
-		LocalDateTime dataCadastro = LocalDateTime.of(this.ano, this.mes, this.dia, 0, 0, 0);
-		LocalDateTime dataComparacao = LocalDateTime.of(this.ano, 1, 1, 0, 0, 0);
-
-		long dias = dataComparacao.until(dataCadastro, ChronoUnit.DAYS);
-
-		return (int) ++dias;
-	}
-
-	public void getDataAtual() {
-		DateFormat DFormat = DateFormat.getDateInstance();
-
-		String data = DFormat.format(new Date());
-
-		System.out.println("A data de hoje: " + data);
-	}
+    }
 }
